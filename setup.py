@@ -20,7 +20,7 @@ from setuptools import Extension
 
 # Use this version when git data are not available, like in git zip archive.
 # Update when tagging a new release.
-FALLBACK_VERSION = '0.0.0'
+FALLBACK_VERSION = '0.0.1'
 
 # determine if we run with Python 3.
 PY3 = (sys.version_info[0] == 3)
@@ -224,7 +224,7 @@ setup_args = dict(
     data_files = data_files,
     install_requires = [
         'six',
-        'diffpy.structure==0.0.0',
+        'diffpy.structure',
     ],
     zip_safe = False,
 
@@ -254,6 +254,8 @@ setup_args = dict(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Topic :: Scientific/Engineering :: Chemistry',
         'Topic :: Scientific/Engineering :: Physics',
     ],
