@@ -8,29 +8,35 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12']
-        #os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
     steps:
     - name: Check-out repository
       uses: actions/checkout@v4
 
-    # - name: set up conda
-    #   uses: s-weigand/setup-conda@v1
-    #   with:
-    #     update-conda: true
-    #     python-version: ${{ matrix.python-version }}
-
-    # - name: set up conda
-    #   uses: conda-incubator/setup-miniconda@v3
-    #   with:
-    #     auto-update-conda: true
-    #     python-version: ${{ matrix.python-version }}
-
-    - name: Install dependencies
+    - name: Install dependencies (MacOS)
+      if: matrix.os == 'macos-latest'
       run: |
         brew install gsl
+        pip install twine
+        pip install wheel
+        pip install setuptools
+        pip install pycifrw
+        pip install six
+        pip install diffpy.structure
+
+    - name: set up conda
+      if: matrix.os != 'macos-latest'
+      uses: s-weigand/setup-conda@v1
+      with:
+        update-conda: true
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies (ubntu-latest, windows-latest)
+      if: matrix.os != 'macos-latest'
+      run: |
+        conda install gsl -c conda-forge
         pip install twine
         pip install wheel
         pip install setuptools
