@@ -36,8 +36,8 @@ jobs:
         conda install -c conda-forge gsl
         conda install -c conda-forge pycifrw
         conda install -c conda-forge six
-        pip install "diffpy.structure==0.0.0" --index-url https://easyscience.github.io/pypi
-
+        pip install diffpy.structure
+ 
     - name: Build wheels
       run: |
         python setup.py sdist bdist_wheel
